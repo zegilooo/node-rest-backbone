@@ -1,0 +1,23 @@
+## Customize the test machine
+machine:
+  timezone:
+    America/Eastern # Set the timezeone
+
+## Customize dependencies
+# dependencies:
+#   pre:
+#     - npm install
+
+## Customize test commands
+test:
+  override:
+    - node_modules/.bin/mocha
+  post:
+    - node_modules/.bin/jshint app.js server client
+    - node_modules/.bin/csslint client
+
+## Custom notifications
+## notify:
+##   webhooks:
+##     # A list of hashes representing hooks. Only the url field is supported.
+##     - url: https://circleci.com/hooks/circle
