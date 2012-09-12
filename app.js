@@ -5,13 +5,14 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')
-  , passport = require('passport');
+  , passport = require('passport')
+  , flash = require('connect-flash');
 
 var app = express();
 
 app.configure(function(){
     app.set('port', process.env.PORT || 3000);
-    app.set('views', __dirname + '/server/views');
+    app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.engine('ejs', require('ejs-locals'));
     app.use(express.favicon());
@@ -20,10 +21,11 @@ app.configure(function(){
     app.use(express.methodOverride());
     app.use(express.cookieParser());
     app.use(express.session({secret:'something'}));
+    app.use(flash());
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'client')));
+    app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -33,39 +35,22 @@ app.configure('development', function(){
 var config = "TBD";
 
 /**
- * Models
+ * Create models
  */
-var db_conn = require('./server/models')(config);
+var db_conn = require('./models')(config);
+
+/**
+ * Setup Passport authentication
+ */
+require('./lib/passport-local')(app, db_conn, passport);
+require('./lib/passport-github')(app, db_conn, passport);
+require('./lib/passport-google')(app, db_conn, passport);
+require('./lib/passport-twitter')(app, db_conn, passport);
 
 /**
  * Register routes with the app
  */
-require('./server/routes')(app, db_conn);
-
-/**
- * Setup Passport persistent sessions
- */
-passport.serializeUser(function(user, done) {
-    done(null, user.email);
-});
-
-passport.deserializeUser(function(email, done) {
-    User.findOne({email:email}, function(err, user) {
-        done(err, user);
-    });
-});
-
-/*
-app.use(express.session({
-    secret:'awesome unicorns',
-    maxAge: new Date(Date.now() + 3600000),
-    store: new MongoStore(
-        {db:mongoose.connection.db},
-        function(err){
-            console.log(err || 'connect-mongodb setup ok');
-        })
-}));
-*/
+require('./routes')(app, db_conn, passport);
 
 /**
  * Start the server

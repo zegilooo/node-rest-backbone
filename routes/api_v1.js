@@ -7,7 +7,7 @@
 var api_version = 1;
 var api_root = '/api/v' + api_version;
 
-module.exports = function(app, db_conn){
+module.exports = function(app, db_conn, passport) {
     var ProductModel = db_conn.model('Product');
 
     app.get(api_root, function (req, res) {

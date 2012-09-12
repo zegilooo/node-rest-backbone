@@ -9,14 +9,18 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="/lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="/lib/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!--
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+  -->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -29,10 +33,19 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/lib/bootstrap/img/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/lib/bootstrap/img/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/lib/bootstrap/img/apple-touch-icon-57-precomposed.png">
+
+    <script>
+      function onLogin () {
+        $('#loginForm').submit();
+        // if failed, show alert with alert-error and message
+        $('#alert').show();
+        $('#loginDialog').modal('hide'); 
+      };
+    </script>
   </head>
 
-  <body>
-      <div class="navbar navbar-inverse navbar-fixed-top">
+  <body class="">
+    <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -40,34 +53,33 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Project name</a>
+          <a class="brand" href="/">node-rest-backbone</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="/">Home</a></li>
               <li><a href="/about">About</a></li>
               <li><a href="/contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
+            <div class="navbar-form pull-right">
+              <% if (user) { %>
+                <div class="btn-group">
+                  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i><%= user.displayName %><span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="#logout">Logout</a></li>
+                  </ul>
+                </div>
+              <% } else { %>
+                <a href="/login" class="btn">Login</a>
+                <a href="/auth/github" class="btn">Sign In</a>
+              <% } %>
+            </div><!--/.navbar-form -->
           </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+        </div><!--/.container -->
+      </div><!--/.navbar-inner -->
+    </div><!--/.navbar -->
 
     <div class="container">
       <%- body %>

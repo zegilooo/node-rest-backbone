@@ -13,8 +13,8 @@ test:
   override:
     - node_modules/.bin/mocha
   post:
-    - node_modules/.bin/jshint app.js server client
-    - node_modules/.bin/csslint client
+    - node_modules/.bin/jshint app.js lib models routes views public/js
+    - node_modules/.bin/csslint public/css views
 
 ## Custom notifications
 ## notify:

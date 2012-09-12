@@ -1,0 +1,41 @@
+<% layout('layout') -%>
+
+<div class="container">
+  <div id="alert" class="hide">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+  </div>
+</div>
+
+<div class="row">
+  <div class="span4">
+    &nbsp;
+  </div>
+  <div class="span4">
+    <div class="row">
+      <form method="post" action="/signup">
+        <legend>Sign Up</legend>
+
+        <input type="text" id="idFirstName" name="idFirstName" placeholder="First Name">
+
+        <input type="text" id="idLastName" name="idLastName" placeholder="Last Name">
+
+        <input type="text" id="idEmail" name="idEmail" placeholder="Email">
+
+        <input type="password" id="idPassword" name="idPassword" placeholder="Password">
+
+        <label class="checkbox">
+          <input type="checkbox" id="idRememberMe" name="idRememberMe" > Remember me
+        </label>
+
+        <input type="submit" class="btn btn-primary">Sign Up</input>
+      </form>
+    </div>
+    <div class="row">
+      Already have an account? <a href="/login">Sign In</a>
+    </div>
+  </div>
+  <div class="span4">
+    &nbsp;
+  </div>
+</div>

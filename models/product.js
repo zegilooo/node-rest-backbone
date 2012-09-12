@@ -5,7 +5,7 @@
 
 var mongoose = require('mongoose');
 
-module.exports = function(mongoose_conn) {
+module.exports = function(db_conn) {
     var Schema = mongoose.Schema; //Schema.ObjectId
     
     var Sizes = new Schema({
@@ -75,7 +75,7 @@ module.exports = function(mongoose_conn) {
         return v.length > 10;
     }, 'Product description should be more than 10 characters');
     
-    return mongoose_conn.model('Product', Product);
+    return db_conn.model('Product', Product);
 }
     
 /* Product Document 
