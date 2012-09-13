@@ -1,0 +1,30 @@
+{
+    "node": {
+        "hostname":"localhost",
+        "port":3000
+    },
+
+    "mongo": {
+        "hostname":"localhost",
+        "port":27017,
+        "username":"",
+        "password":"",
+        "name":"",
+        "db":"ecomm_database"
+    },
+
+    "github": {
+        "id":"--insert-github-client-id-here--",
+        "secret":"--insert-github-client-secret-here--"
+    },
+
+    "google": {
+        "id":"--insert-google-client-id-here--",
+        "secret":"--insert-google-client-secret-here--"
+    },
+
+    "twitter": {
+        "id":"--insert-twitter-client-id-here--",
+        "secret":"--insert-twitter-client-secret-here--"
+    }
+}

@@ -26,57 +26,6 @@ module.exports = function(app, db_conn, passport) {
         res.render('contact.ejs', { user: req.user });
     });
 
-	/**
-     * GET signin page.
-     */
-    app.get('/signin', function (req, res) {
-        res.render('signin.ejs', { user: req.user });
-    });
-
-	/**
-     * GET signup page.
-     */
-    app.get('/signup', function (req, res) {
-        res.render('signup.ejs', { user: req.user });
-    });
-
-	app.post('/signup', function (req, res) {
-		console.log("Signup:" +
-					" email=" + req.param('idEmail', null) +
-					" password=" + req.param('idPassword', null) +
-					" fname=" + req.param('idFirstName', null) +
-					" lname=" + req.param('idLastName', null));
-
-		var User = db_conn.model('User');
-		var user = new User();
-
-		user.email = req.param('idEmail');
-		user.password = req.param('idPassword');
-		user.name.first = req.param('idFirstName');
-		user.name.last = req.param('idLastName');
-
-		var self = req;
-		user.save(function (err) {
-			if (err) {
-			 	console.log("error:" + err);
-			 	// show error message
-			} else {
-	        	res.render('signin.ejs', { user: req.user });
-			}
-		});
-	});
-
-    /**
-     * POST local login page.
-     */
-     /*
-    app.post('/login', passport.authenticate('local'), function(req, res) {
-	    // If this function gets called, authentication was successful.
-	    // `req.user` property contains the authenticated user.
-	    res.render('app.ejs', { user: req.user });
-	});
-	*/
-
     /**
      * GET logout page.
      */
@@ -89,6 +38,7 @@ module.exports = function(app, db_conn, passport) {
      * GET Backbone app container page.
      */
     app.get('/app', function (req, res) {
+        console.log("GET /app: user=" + req.user);
         res.render('app.ejs', { user: req.user });
     });
 

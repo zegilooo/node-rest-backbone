@@ -8,8 +8,36 @@ var mongoose = require('mongoose');
 var mongooseTypes = require("mongoose-types");
 var fs = require('fs');
 
+var generate_mongo_url = function(obj){
+  obj.hostname = (obj.hostname || 'localhost');
+  obj.port = (obj.port || 27017);
+  obj.db = (obj.db || 'test');
+
+  if(obj.username && obj.password){
+    return "mongodb://" + obj.username + ":" + obj.password + "@" + obj.hostname + ":" + obj.port + "/" + obj.db;
+  }
+  else{
+    return "mongodb://" + obj.hostname + ":" + obj.port + "/" + obj.db;
+  }
+}
+
 module.exports = function(config) {
-    var db_conn = mongoose.createConnection('mongodb://localhost/ecomm_database');
+    /**
+     * mongodb setup
+     */
+    if(process.env.VCAP_SERVICES) {
+        // Cloudfoundry
+        var env = JSON.parse(process.env.VCAP_SERVICES);
+        var mongo = env['mongodb-1.8'][0]['credentials'];
+    } else {
+        // Configuration module
+        var mongo = config.mongo;
+    }
+
+    var mongourl = generate_mongo_url(mongo);
+    console.log("Connecting to mongodb on: " + mongourl);
+
+    var db_conn = mongoose.createConnection(mongourl);
     mongooseTypes.loadTypes(mongoose);
 
     fs.readdirSync(__dirname).forEach(function(file) {

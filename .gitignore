@@ -5,3 +5,4 @@ node_modules/*
 public/index_files
 public/pics
 public/tpl
+config/*.json

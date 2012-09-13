@@ -2,6 +2,8 @@
  * Module dependencies.
  */
 
+var config = require('config');
+
 var express = require('express')
   , http = require('http')
   , path = require('path')
@@ -11,12 +13,13 @@ var express = require('express')
 var app = express();
 
 app.configure(function(){
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', config.node.port || process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
     app.engine('ejs', require('ejs-locals'));
     app.use(express.favicon());
     app.use(express.logger('dev'));
+    app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser());
@@ -25,14 +28,11 @@ app.configure(function(){
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
     app.use(express.errorHandler());
 });
-
-var config = "TBD";
 
 /**
  * Create models
@@ -40,12 +40,13 @@ var config = "TBD";
 var db_conn = require('./models')(config);
 
 /**
- * Setup Passport authentication
+ * Setup all configured Passport authentication modules. 
+ *
+ * NOTE: these modules define the routes that they need to function, and some of these routes need to render views,
+ * creating a coupling between the Passport modules and the rest of the application that I'd rather avoid. Need to
+ * figure out how to deal with this.
  */
-require('./lib/passport-local')(app, db_conn, passport);
-require('./lib/passport-github')(app, db_conn, passport);
-require('./lib/passport-google')(app, db_conn, passport);
-require('./lib/passport-twitter')(app, db_conn, passport);
+require('./lib/passport')(config, app, db_conn, passport);
 
 /**
  * Register routes with the app

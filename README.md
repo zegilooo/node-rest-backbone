@@ -25,19 +25,19 @@ Directory Structure
 
 ### Client based on Backbone.js and Bootstrap
 
-* /client/css: Stylesheets
-* /client/img: Images
-* /client/js: Client-side javascript
-* /client/lib: Client-side 3rd party modules
+* /public/css: Stylesheets
+* /public/img: Images
+* /public/js: Client-side javascript
+* /public/lib: Client-side 3rd party modules
 
 ### Server running on Node.js and mongodb
 
-* /server/lib: Custom libraries
-* /server/models: Mongoose schema
-* /server/routes: Routes to site pages and REST services
-* /server/sockets: Sockets for publishing updates
-* /server/vendor: Server-side 3rd party modules
-* /server/views: Site page templates
+* /lib: Custom libraries
+* /models: Mongoose schema
+* /routes: Routes to site pages and REST services
+* /sockets: Sockets for publishing updates
+* /vendor: Server-side 3rd party modules
+* /views: Site page templates
 
 ### Unit tests
 

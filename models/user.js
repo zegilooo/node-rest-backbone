@@ -10,18 +10,27 @@ module.exports = function(mongoose_conn) {
     var Schema = mongoose.Schema; //Schema.ObjectId
     var Email = mongoose.SchemaTypes.Email;
     
+    var Account = new Schema({
+      uid: { type: Number, required: true },
+      provider: { type: String, required: true },
+    });
+
     var User = new Schema({
       email: { type: Email, unique: true },
 
       // Password
-      salt: { type: String, required: true },
-      hash: { type: String, required: true },
+      salt: { type: String, required: false },
+      hash: { type: String, required: false },
+
+      displayName: { type: String, required: false },
 
       // Name
       name: {
-        first: { type: String, required: true },
-        last: { type: String, required: true }
-      }
+        first: { type: String, required: false },
+        last: { type: String, required: false }
+      },
+
+      accounts: [Account]
     });
 
     User.virtual('password').get(function () {
