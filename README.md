@@ -1,6 +1,18 @@
 node-rest-backbone
 ==================
 
+Starter template for Node.js app, using Backbone.js and Bootstrap on the client, local and 3d party OAUTH authentication, RESTful services for integration with the Backbone.js client, and Socket.io for pushing updates to the client.
+
+TODO:
+-----
+
+* remember me
+* profile view
+* show/hide alerts
+* graphics for provider login/signup buttons (Github, Google, etc.)
+* error handling
+* test cases
+
 Deploying
 ---------
 
@@ -35,7 +47,6 @@ Directory Structure
 * /lib: Custom libraries
 * /models: Mongoose schema
 * /routes: Routes to site pages and REST services
-* /sockets: Sockets for publishing updates
 * /vendor: Server-side 3rd party modules
 * /views: Site page templates
 
@@ -52,7 +63,7 @@ Node runs app.js, which sets up the server with models, routes, sockets, and vie
 Configuration
 -------------
 
-Environment specific configuration parameters are stored in config.js
+Environment specific configuration parameters are stored in JSON files located in the config directory. Look at config/default.json.example.
 
 Security
 --------

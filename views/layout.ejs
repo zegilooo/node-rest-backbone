@@ -34,14 +34,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/lib/bootstrap/img/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/lib/bootstrap/img/apple-touch-icon-57-precomposed.png">
 
-    <script>
-      function onLogin () {
-        $('#loginForm').submit();
-        // if failed, show alert with alert-error and message
-        $('#alert').show();
-        $('#loginDialog').modal('hide'); 
-      };
-    </script>
+    <!-- Need to place jquery in the head to make both flat and Backbone.js pages work properly -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   </head>
 
   <body class="">
@@ -67,13 +61,13 @@
                     <i class="icon-user"></i> <%= user.displayName %> <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="#profile">Profile</a></li>
+                    <li><a href="/profile">Profile</a></li>
                     <li><a href="/logout">Logout</a></li>
                   </ul>
                 </div>
               <% } else { %>
                 <a href="/login" class="btn">Login</a>
-                <a href="/auth/github" class="btn">Sign In</a>
+                <a href="/signup" class="btn">Sign Up</a>
               <% } %>
             </div><!--/.navbar-form -->
           </div><!--/.nav-collapse -->
@@ -96,7 +90,6 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="/lib/bootstrap/js/bootstrap.min.js"></script> 
 
   </body>

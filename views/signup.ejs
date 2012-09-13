@@ -13,22 +13,37 @@
   </div>
   <div class="span4">
     <div class="row">
+      <% if (config.hasOwnProperty('google')) { %>
+        <h2><a href="/auth/google">Signup with Google</a></h2>
+      <% } %>
+    </div>
+    <div class="row">
+      <% if (config.hasOwnProperty('github')) { %>
+        <h2><a href="/auth/github">Signup with Github</a></h2>
+      <% } %>
+    </div>
+    <div class="row">
+      <% if (config.hasOwnProperty('twitter')) { %>
+        <h2><a href="/auth/twitter">Signup with Twitter</a></h2>
+      <% } %>
+    </div>
+    <div class="row">
       <form method="post" action="/signup">
         <legend>Sign Up</legend>
 
-        <input type="text" id="idFirstName" name="idFirstName" placeholder="First Name">
+        <input type="text" id="idFirstName" name="first" placeholder="First Name">
 
-        <input type="text" id="idLastName" name="idLastName" placeholder="Last Name">
+        <input type="text" id="idLastName" name="last" placeholder="Last Name">
 
-        <input type="text" id="idEmail" name="idEmail" placeholder="Email">
+        <input type="text" id="idEmail" name="email" placeholder="Email">
 
-        <input type="password" id="idPassword" name="idPassword" placeholder="Password">
+        <input type="password" id="idPassword" name="password" placeholder="Password">
 
         <label class="checkbox">
-          <input type="checkbox" id="idRememberMe" name="idRememberMe" > Remember me
+          <input type="checkbox" id="idRememberMe" name="remember" > Remember me
         </label>
 
-        <input type="submit" class="btn btn-primary">Sign Up</input>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
       </form>
     </div>
     <div class="row">

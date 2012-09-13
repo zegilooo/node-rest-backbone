@@ -10,40 +10,45 @@
 </div>
 
 <div class="row">
-  <div class="span6">
-    <h2>Heading</h2>
-    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
- </div>
-  <div class="span6">
+  <div class="span4">
+    &nbsp;
+  </div>
+  <div class="span4">
     <div class="row">
-      <h2>Sign In</h2>
+      <% if (config.hasOwnProperty('google')) { %>
+        <h2><a href="/auth/google">Login with Google</a></h2>
+      <% } %>
     </div>
     <div class="row">
-      <form id="loginForm" class="form-horizontal" method="post" action="/login">
-        <div class="control-group">
-          <label class="control-label" for="inputEmail">Email</label>
-          <div class="controls">
-            <input type="text" id="inputEmail" name="email" placeholder="Email">
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="inputPassword">Password</label>
-          <div class="controls">
-            <input type="password" id="inputPassword" name="password" placeholder="Password">
-          </div>
-        </div>
-        <div class="control-group">
-          <div class="controls">
-            <label class="checkbox">
-              <input type="checkbox"> Stay signed in
-            </label>
-            <button type="submit" class="btn btn-primary">Sign In</button>
-          </div>
-        </div>
+      <% if (config.hasOwnProperty('github')) { %>
+        <h2><a href="/auth/github">Login with Github</a></h2>
+      <% } %>
+    </div>
+    <div class="row">
+      <% if (config.hasOwnProperty('twitter')) { %>
+        <h2><a href="/auth/twitter">Login with Twitter</a></h2>
+      <% } %>
+    </div>
+    <div class="row">
+      <form method="post" action="/signup">
+        <legend>Login</legend>
+
+        <input type="text" id="idEmail" name="email" placeholder="Email">
+
+        <input type="password" id="idPassword" name="password" placeholder="Password">
+
+        <label class="checkbox">
+          <input type="checkbox" id="idRememberMe" name="remember" > Remember me
+        </label>
+
+        <button type="submit" class="btn btn-primary">Login</button>
       </form>
     </div>
     <div class="row">
-      <a href="#signUpDialog">Forgot password?</a> <a href="#signUpDialog">Sign Up</a>
+      <a href="#signUpDialog">Forgot password?</a> <a href="/signup">Sign Up</a>
     </div>
+  </div>
+  <div class="span4">
+    &nbsp;
   </div>
 </div>

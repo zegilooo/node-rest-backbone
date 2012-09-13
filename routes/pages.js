@@ -27,17 +27,9 @@ module.exports = function(app, db_conn, passport) {
     });
 
     /**
-     * GET logout page.
-     */
-	app.get('/logout', function(req, res){
-	  req.logout();
-	  res.redirect('/');
-	});
-
-    /**
      * GET Backbone app container page.
      */
-    app.get('/app', function (req, res) {
+    app.get('/app', isAuthenticated, function (req, res) {
         console.log("GET /app: user=" + req.user);
         res.render('app.ejs', { user: req.user });
     });
