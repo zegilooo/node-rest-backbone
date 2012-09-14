@@ -116,7 +116,7 @@ module.exports = function(app, db_conn, passport) {
     // DELETE to DESTROY
     
     // Bulk destroy all products
-    app.delete(api_root + '/products', function (req, res) {
+    app['delete'](api_root + '/products', function (req, res) {
       ProductModel.remove(function (err) {
         if (!err) {
           console.log("removed");
@@ -128,7 +128,7 @@ module.exports = function(app, db_conn, passport) {
     });
     
     // remove a single product
-    app.delete(api_root + '/products/:id', function (req, res) {
+    app['delete'](api_root + '/products/:id', function (req, res) {
       return ProductModel.findById(req.params.id, function (err, product) {
         return product.remove(function (err) {
           if (!err) {
@@ -140,4 +140,4 @@ module.exports = function(app, db_conn, passport) {
         });
       });
     });
-}
+};

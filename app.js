@@ -4,11 +4,11 @@
 
 var config = require('config');
 
-var express = require('express')
-  , http = require('http')
-  , path = require('path')
-  , passport = require('passport')
-  , flash = require('connect-flash');
+var express = require('express'),
+    http = require('http'),
+    path = require('path'),
+    passport = require('passport'),
+    flash = require('connect-flash');
 
 var app = express();
 
@@ -19,7 +19,7 @@ app.configure(function(){
     app.engine('ejs', require('ejs-locals'));
     app.use(express.favicon());
     app.use(express.logger('dev'));
-    app.use(express.static(path.join(__dirname, 'public')));
+    app.use(express['static'](path.join(__dirname, 'public')));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser());

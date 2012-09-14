@@ -13,4 +13,4 @@ module.exports = function(app, db_conn, passport) {
         console.log("Requiring routes for " + name);
         require('./' + name)(app, db_conn, passport);
     });
-}
+};

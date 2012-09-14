@@ -12,7 +12,7 @@ module.exports = function(mongoose_conn) {
     
     var Account = new Schema({
       uid: { type: Number, required: true },
-      provider: { type: String, required: true },
+      provider: { type: String, required: true }
     });
 
     var User = new Schema({
@@ -45,7 +45,7 @@ module.exports = function(mongoose_conn) {
       bcrypt.compare(password, this.hash, callback);
     });
 
-    User.static('authenticate', function (email, password, callback) {
+    User['static']('authenticate', function (email, password, callback) {
       // Find the user by username.  If there is no user with the given
       // username, or the password is not correct, set the user to `false` to
       // indicate failure.  Otherwise, return the authenticated `user`.
@@ -69,4 +69,4 @@ module.exports = function(mongoose_conn) {
     });
 
     return mongoose_conn.model('User', User);
-}
+};

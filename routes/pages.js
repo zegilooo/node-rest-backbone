@@ -43,4 +43,4 @@ module.exports = function(app, db_conn, passport) {
 		if (req.isAuthenticated()) { return next(); }
 		res.redirect('/login');
 	}
-}
+};

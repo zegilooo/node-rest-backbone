@@ -76,7 +76,7 @@ module.exports = function(db_conn) {
     }, 'Product description should be more than 10 characters');
     
     return db_conn.model('Product', Product);
-}
+};
     
 /* Product Document 
 [{  
@@ -127,4 +127,3 @@ module.exports = function(db_conn) {
       ]  
 }]
 */
-    

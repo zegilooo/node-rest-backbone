@@ -19,19 +19,21 @@ var generate_mongo_url = function(obj){
   else{
     return "mongodb://" + obj.hostname + ":" + obj.port + "/" + obj.db;
   }
-}
+};
 
 module.exports = function(config) {
+    var mongo;
+
     /**
      * mongodb setup
      */
     if(process.env.VCAP_SERVICES) {
-        // Cloudfoundry
+        // Cloudfoundry overrides config
         var env = JSON.parse(process.env.VCAP_SERVICES);
-        var mongo = env['mongodb-1.8'][0]['credentials'];
+        mongo = env['mongodb-1.8'][0]['credentials'];
     } else {
         // Configuration module
-        var mongo = config.mongo;
+        mongo = config.mongo;
     }
 
     var mongourl = generate_mongo_url(mongo);
@@ -49,4 +51,4 @@ module.exports = function(config) {
     });
 
     return(db_conn);
-}
+};
